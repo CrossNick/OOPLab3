@@ -32,6 +32,13 @@ public:
 		{
 			current = cur;
 		}
+		StackIterator(StackIterator const& copy) {
+			current = copy.current;
+		}
+
+		JavaIterator* clone() const override {
+			return new StackIterator(*this);
+		}
 		bool hasNext() override {
 			return current != nullptr;
 		}
@@ -55,6 +62,13 @@ public:
 		{
 			current = cur;
 		}
+		StackConstIterator(StackConstIterator const& copy) {
+			current = copy.current;
+		}
+
+		JavaIterator* clone() const override {
+			return new StackConstIterator(*this);
+		}
 		bool hasNext() override {
 			return current != nullptr;
 		}
@@ -71,7 +85,7 @@ public:
 	friend class StackConstIterator<const T, Node<T>>;
 	JavaIterator<T> *createIterator() override;
 	JavaIterator<const T> *createConstIterator() const override;
-
+	typedef JavaIterator<T> iterator;
 	virtual ~Stack();
 };
 

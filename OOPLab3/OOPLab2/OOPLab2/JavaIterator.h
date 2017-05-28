@@ -6,6 +6,7 @@ class JavaIterator
 public:
 	virtual T& next() = 0;
 	virtual bool hasNext() = 0;
+	virtual JavaIterator *clone() const = 0;
 	virtual ~JavaIterator() {}
 };
 

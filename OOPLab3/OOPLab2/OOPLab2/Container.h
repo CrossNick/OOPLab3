@@ -77,6 +77,37 @@ inline void Container<T>::Sort()
 }
 
 template<class T>
+inline void sort(T& container)
+{
+	int ind1 = 1, ind2 = 0;
+	T::iterator *iter1 = container.createIterator();
+	while (ind1 <= container.size())
+	{
+		auto x = iter1->next();
+		ind2 = ind1;
+		while (ind2 > 0)
+		{
+			T::iterator *iter3 = container.createIterator();
+			for (int i = 0; i < ind2 - 2; i++)
+				iter3->next();
+			auto x1 = iter3->next();
+			if (x1 <= x)
+				break;
+			iter3->next() = x1;
+			delete iter3;
+			--ind2;
+		}
+		T::iterator *iter2 = container.createIterator();
+		for (int i = 0; i < ind2 - 1; i++)
+			iter2->next();
+		iter2->next() = x;
+		delete iter2;
+		++ind1;
+	};
+	delete iter1;
+}
+
+template<class T>
  bool Container<T>::operator ==(Container const& ct) const
 {
 	auto iter1 = createConstIterator();

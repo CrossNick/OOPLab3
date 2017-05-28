@@ -37,6 +37,13 @@ public:
 		{
 			current = cur;
 		}
+		DequeIterator(DequeIterator const& copy) {
+			current = copy.current;
+		}
+
+		JavaIterator* clone() const override {
+			return new DequeIterator(*this);
+		}
 		bool hasNext() override {
 			return current!= nullptr;
 		}
@@ -60,6 +67,13 @@ public:
 		{
 			current = cur;
 		}
+		DequeConstIterator(DequeConstIterator const& copy) {
+			current = copy.current;
+		}
+
+		JavaIterator* clone() const override {
+			return new DequeConstIterator(*this);
+		}
 		bool hasNext() override {
 			return current!= nullptr;
 		}
@@ -77,6 +91,7 @@ public:
 	JavaIterator<T> *createIterator() override;
 	JavaIterator<const T> *createConstIterator() const override;
 
+	typedef JavaIterator<T> iterator;
 	virtual ~LinkedDeque();
 };
 

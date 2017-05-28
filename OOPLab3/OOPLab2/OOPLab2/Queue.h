@@ -34,6 +34,13 @@ public:
 		{
 			current = cur;
 		}
+		QueueIterator(QueueIterator const& copy) {
+			current = copy.current;
+		}
+
+		JavaIterator* clone() const override {
+			return new QueueIterator(*this);
+		}
 		bool hasNext() override {
 			return current != nullptr;
 		}
@@ -57,6 +64,13 @@ public:
 		{
 			current = cur;
 		}
+		QueueConstIterator(QueueConstIterator const& copy) {
+			current = copy.current;
+		}
+
+		JavaIterator* clone() const override {
+			return new QueueConstIterator(*this);
+		}
 		bool hasNext() override {
 			return current != nullptr;
 		}
@@ -73,6 +87,7 @@ public:
 	friend class QueueConstIterator<const T,  Node<T>>;
 	JavaIterator<T> *createIterator() override;
 	JavaIterator<const T> *createConstIterator() const override;
+	typedef JavaIterator<T> iterator;
 	virtual ~Queue();
 };
 

@@ -32,6 +32,14 @@ public:
 		{
 			current = 0;
 		}
+		ArrayIterator(ArrayIterator const& copy) {
+			current = copy.current;
+			size = copy.size;
+			arr = copy.arr;
+		}
+		JavaIterator* clone() const override {
+			return new ArrayIterator(*this);
+		}
 		bool hasNext() override {
 			return current<size-1;
 		}
@@ -57,6 +65,14 @@ public:
 		{
 			current = 0;
 		}
+		ArrayConstIterator(ArrayConstIterator const& copy) {
+			current = copy.current;
+			size = copy.size;
+			arr = copy.arr;
+		}
+		JavaIterator* clone() const override {
+			return new ArrayConstIterator(*this);
+		}
 		bool hasNext() override {
 			return current<size;
 		}
@@ -72,6 +88,7 @@ public:
 	friend class ArrayConstIterator<const T>;
 	JavaIterator<T> *createIterator() override;
 	JavaIterator<const T> *createConstIterator() const override;
+	typedef JavaIterator<T> iterator;
 	virtual ~StaticArray();
 };
 

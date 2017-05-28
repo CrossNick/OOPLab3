@@ -80,7 +80,7 @@ int main()
 	for (int j = 0; j <10;j++)
 		ars[j] = 9-j;
 	cout << ars << endl;
-	ars.Sort();
+	sort(ars);
 	cout << ars << endl;
 	system("pause");
 

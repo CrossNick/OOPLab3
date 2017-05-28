@@ -44,6 +44,13 @@ public:
 		bool hasNext() override {
 			return current != nullptr;
 		}
+		ListIterator(ListIterator const& copy) {
+			current = copy.current;
+		}
+
+		JavaIterator* clone() const override {
+			return new ListIterator(*this);
+		}
 		S& next() override {
 			S& tmp = current->value;
 			if (current != nullptr)
@@ -64,6 +71,13 @@ public:
 		{
 			current = cur;
 		}
+		ListConstIterator(ListConstIterator const& copy) {
+			current = copy.current;
+		}
+
+		JavaIterator* clone() const override {
+			return new ListConstIterator(*this);
+		}
 		bool hasNext() override {
 			return current!= nullptr;
 		}
@@ -80,7 +94,7 @@ public:
 	friend class ListConstIterator<const T, Node<T>>;
 	JavaIterator<T> *createIterator() override;
 	JavaIterator<const T> *createConstIterator() const override;
-
+	typedef JavaIterator<T> iterator;
 	virtual ~LinkedList();
 };
 
